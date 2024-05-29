@@ -294,8 +294,8 @@ class UserInterface {
 
     public static void main(String[] args) {
         try {
-            Person person = ru.gb.exceptions.tasks.task3_Attestation.UserInterface.getUserInput();
-            ru.gb.exceptions.tasks.task3_Attestation.UserInterface.saveToFile(person);
+            Person person = UserInterface.getUserInput();
+            UserInterface.saveToFile(person);
             System.out.println("Данные успешно сохранены в файл!");
         } catch (InputException e) { // Ловим все исключения, наследующиеся от InputException
             System.out.println(e.getClass().getName());
