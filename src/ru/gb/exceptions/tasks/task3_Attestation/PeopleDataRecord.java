@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 
 
 
-class UserInterface {
+class PeopleDataRecord {
 
     private static final Pattern FIO_PATTERN = Pattern.compile("(?<=\\s|^)([А-Яа-яA-Za-z]+)(?=\\s|$)");
     private static final Pattern DATE_OF_BIRTH_PATTERN = Pattern.compile("(0[1-9]|[1-2][0-9]|[3][0-1])\\.(0[1-9]|1[0-2])\\.(19[0-9][0-9]|20[0-9][0-9])");
@@ -294,8 +294,8 @@ class UserInterface {
 
     public static void main(String[] args) {
         try {
-            Person person = UserInterface.getUserInput();
-            UserInterface.saveToFile(person);
+            Person person = PeopleDataRecord.getUserInput();
+            PeopleDataRecord.saveToFile(person);
             System.out.println("Данные успешно сохранены в файл!");
         } catch (InputException e) { // Ловим все исключения, наследующиеся от InputException
             System.out.println(e.getClass().getName());
