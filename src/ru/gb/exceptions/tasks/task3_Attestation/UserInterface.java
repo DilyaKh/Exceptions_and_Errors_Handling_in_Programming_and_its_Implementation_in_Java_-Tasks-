@@ -1,127 +1,14 @@
 package ru.gb.exceptions.tasks.task3_Attestation;
 
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
-
-
-//Класс, который содержит данные о человеке:
-class Person {
-    private String surname;
-    private String name;
-    private String patronymic;
-    private String dateOfBirth;
-    private String phoneNumber;
-    private String gender;
-
-
-    public Person(String surname, String name, String patronymic, String dateOfBirth, String phoneNumber, String gender) {
-        this.surname = surname;
-        this.name = name;
-        this.patronymic = patronymic;
-        this.dateOfBirth = dateOfBirth;
-        this.phoneNumber = phoneNumber;
-        this.gender = gender;
-    }
-
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getPatronymic() {
-        return patronymic;
-    }
-
-    public String getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-
-    @Override
-    public String toString() {
-        return surname + " " + name + " " + patronymic + " " + dateOfBirth + " " + phoneNumber + " " + gender;
-    }
-}
-
-
-
-//----------------------------------
-
-//КЛАССЫ ПОЛЬЗОВАТЕЛЬСКИХ ИСКЛЮЧЕНИЙ
-
-
-class InputException extends RuntimeException {
-    public InputException(String message) {
-        super(message);
-    }
-}
-
-
-class InvalidComponentsNumberException extends InputException {
-    public InvalidComponentsNumberException(String message) {
-        super(message);
-    }
-}
-
-class ComponentsNotFoundException extends InputException {
-    public ComponentsNotFoundException(String message) {
-        super(message);
-    }
-}
-
-
-class InvalidDateException extends InputException {
-    public InvalidDateException(String message) {
-        super(message);
-    }
-}
-
-
-class UnknownInputFormatException extends InputException {
-    private final List<String> unknownFormats;
-
-    public UnknownInputFormatException(List<String> unknownFormats) {
-        super("Введены компоненты, не соответствующие ни одному из требуемых форматов:\n" + unknownFormats);
-        this.unknownFormats = new ArrayList<>(unknownFormats);
-    }
-
-    public List<String> getUnknownFormats() {
-        return unknownFormats;
-    }
-}
-
-
-class FileException extends Exception {
-    public FileException(String message) {
-        super(message);
-    }
-
-    public FileException(String message, Throwable cause) {
-        super(message, cause);
-    }
-}
-
-//----------------------------------
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 
@@ -147,14 +34,14 @@ class UserInterface {
 
         Scanner scanner = new Scanner(System.in);
         System.out.print("Нужно ввести Фамилию, Имя, Отчество, дату рождения, номер телефона, пол (разделяя пробелами).\n" +
-                        "(можно в ПРОИЗВОЛЬНОМ ПОРЯДКЕ):\n" +
-                        "-------------------------\n" +
-                        "Форматы данных для ввода:\n\n" +
-                        "Фамилия, Имя, Отчество - строки\n" +
-                        "дата рождения - строка формата dd.mm.yyyy\n" +
-                        "номер телефона - целое беззнаковое число без форматирования\n" +
-                        "пол - символ латиницей f или m\n\n" +
-                        "ВВЕСТИ ЗДЕСЬ --->: ");
+                "(можно в ПРОИЗВОЛЬНОМ ПОРЯДКЕ):\n" +
+                "-------------------------\n" +
+                "Форматы данных для ввода:\n\n" +
+                "Фамилия, Имя, Отчество - строки\n" +
+                "дата рождения - строка формата dd.mm.yyyy\n" +
+                "номер телефона - целое беззнаковое число без форматирования\n" +
+                "пол - символ латиницей f или m\n\n" +
+                "ВВЕСТИ ЗДЕСЬ --->: ");
         String input = scanner.nextLine();
         scanner.close();
 //        -----------------------------------------------------------------
@@ -403,10 +290,12 @@ class UserInterface {
 
 
 
+//------------------------------------------
+
     public static void main(String[] args) {
         try {
-            Person person = UserInterface.getUserInput();
-            UserInterface.saveToFile(person);
+            Person person = ru.gb.exceptions.tasks.task3_Attestation.UserInterface.getUserInput();
+            ru.gb.exceptions.tasks.task3_Attestation.UserInterface.saveToFile(person);
             System.out.println("Данные успешно сохранены в файл!");
         } catch (InputException e) { // Ловим все исключения, наследующиеся от InputException
             System.out.println(e.getClass().getName());
@@ -422,4 +311,4 @@ class UserInterface {
 }
 
 
-//-----------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
